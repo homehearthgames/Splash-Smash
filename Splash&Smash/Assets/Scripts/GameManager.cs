@@ -11,13 +11,11 @@ public class GameManager : MonoBehaviour
     public GameObject wave1;
     public GameObject wave2;
 
+    public int waveWidth;
+
     public Sprite waveSp1;
     public Sprite waveSp2;
     public Sprite waveSp3;
-
-    public Collider2D waveBC1;
-    public Collider2D waveBC2;
-    public Collider2D waveBC3;
 
     void Start()
     {
@@ -35,24 +33,24 @@ public class GameManager : MonoBehaviour
         if (wave1.transform.position.x < wave2.transform.position.x)
         {
             wave1.transform.position = new Vector3(wave1.transform.position.x - waveSpeed, wave1.transform.position.y, wave1.transform.position.z);
-            wave2.transform.position = new Vector3(wave1.transform.position.x + 320, wave2.transform.position.y, wave2.transform.position.z);
+            wave2.transform.position = new Vector3(wave1.transform.position.x + waveWidth, wave2.transform.position.y, wave2.transform.position.z);
         }
         else
         {
             wave2.transform.position = new Vector3(wave2.transform.position.x - waveSpeed, wave2.transform.position.y, wave2.transform.position.z);
-            wave1.transform.position = new Vector3(wave2.transform.position.x + 320, wave1.transform.position.y, wave1.transform.position.z);
+            wave1.transform.position = new Vector3(wave2.transform.position.x + waveWidth, wave1.transform.position.y, wave1.transform.position.z);
         }
 
 
-        if (wave1.transform.position.x <= -320)
+        if (wave1.transform.position.x <= -waveWidth)
         {
-            wave1.transform.position = new Vector3(wave2.transform.position.x + 320, wave1.transform.position.y, wave1.transform.position.z);
+            wave1.transform.position = new Vector3(wave2.transform.position.x + waveWidth, wave1.transform.position.y, wave1.transform.position.z);
             GetNewWave(wave1);
         }
 
-        if (wave2.transform.position.x <= -320)
+        if (wave2.transform.position.x <= -waveWidth)
         {
-            wave2.transform.position = new Vector3(wave1.transform.position.x + 320, wave2.transform.position.y, wave2.transform.position.z);
+            wave2.transform.position = new Vector3(wave1.transform.position.x + waveWidth, wave2.transform.position.y, wave2.transform.position.z);
             GetNewWave(wave2);
         }
     }
