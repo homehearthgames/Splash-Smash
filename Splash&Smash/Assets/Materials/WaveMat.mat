@@ -52,8 +52,8 @@ Material:
     m_Floats:
     - _EnableExternalAlpha: 0
     - _GradientScale: 3
-    - _RippleCount: 0.2
-    - _RippleSpeed: 1.14
+    - _RippleCount: 0.5
+    - _RippleSpeed: 0.4
     - _RippleStrength: 2
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
