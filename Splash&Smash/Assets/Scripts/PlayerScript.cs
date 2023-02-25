@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using DentedPixel;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float playerSpeedX;
-    public float playerSpeedY;
-    public Transform xMin;
-    public Transform xMax;
-    public Transform yMin;
-    public Transform yMax;
-    private bool isJumping=false;
-    public float jumpSpeed;
+    
+    public bool isJumping=false;
+    public float jumpHeight;
+    public float jumpTime;
     private float curTime;
 
     // Start is called before the first frame update
@@ -25,45 +22,35 @@ public class PlayerScript : MonoBehaviour
     void Update()
     {
         curTime = Time.deltaTime;
-        GetInput();
+
         if (isJumping)
             Jumping();
     }
 
-    void GetInput()
-    {
-        
-        if (Input.GetAxis("Horizontal")<0 && transform.position.x - playerSpeedX* curTime > xMin.position.x)
-        {
-            transform.position = new Vector3(transform.position.x - playerSpeedX * curTime, transform.position.y, transform.position.z);
-        }
-        if (Input.GetAxis("Horizontal") > 0 && transform.position.x + playerSpeedX * curTime < xMax.position.x)
-        {
-            transform.position = new Vector3(transform.position.x + playerSpeedX * curTime, transform.position.y, transform.position.z);
-        }
-        if (Input.GetAxis("Vertical") > 0 && transform.position.y + playerSpeedY * curTime < yMin.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y + playerSpeedY * curTime, transform.position.z);
-        }
-        if (Input.GetAxis("Vertical") < 0 && transform.position.y - playerSpeedY * curTime > yMax.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - playerSpeedY * curTime, transform.position.z);
-        }
-        
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("asdfsfd");
-        if (collision.tag=="Wave")
+        if (collision.tag=="Wave" && !isJumping)
         {
+            Debug.Log("Hit wave");
             isJumping = true;
+            float waveHeight = collision.transform.localScale.x;
+            var seq = LeanTween.sequence(); 
+            seq.append(LeanTween.moveLocalY(gameObject, jumpHeight * waveHeight, jumpTime).setEase(LeanTweenType.easeOutExpo)); // jump up
+
+            seq.append(LeanTween.moveLocalY(gameObject, 0, jumpTime).setEase(LeanTweenType.easeInExpo)); // jump down
+            seq.append(() => { // fire event after tween
+                Debug.Log("Landed");
+                isJumping = false;
+            }); ;
+
+            Debug.Log("Wave size:" + waveHeight+" jump height: "+ (jumpHeight * waveHeight));
         }
     }
 
     void Jumping()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y + jumpSpeed* curTime, transform.position.z);
+        
     }
 
 }
