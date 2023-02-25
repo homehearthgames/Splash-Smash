@@ -12,6 +12,10 @@ public class PlayerScript : MonoBehaviour
     public float jumpTime;
     private float curTime;
 
+    public ParticleSystem splash1;
+    public ParticleSystem splash2;
+    public ParticleSystem splash3;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +46,9 @@ public class PlayerScript : MonoBehaviour
             seq.append(() => { // fire event after tween
                 Debug.Log("Landed");
                 isJumping = false;
+                splash1.Play();
+                splash2.Play();
+                splash3.Play();
             }); ;
 
             Debug.Log("Wave size:" + waveHeight+" jump height: "+ (jumpHeight * waveHeight));
