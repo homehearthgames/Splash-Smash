@@ -1,52 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    public float playerSpeedX;
-    public float playerSpeedY;
-    public Transform xMin;
-    public Transform xMax;
-    public Transform yMin;
-    public Transform yMax;
-
+    private BoxCollider2D col;
     // Start is called before the first frame update
     void Start()
     {
-
+        col = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetInput();
+        bool ig = IsGrounded();
     }
 
-    void GetInput()
+    bool IsGrounded()
     {
-        float t = Time.deltaTime;
-        if (Input.GetAxis("Horizontal")<0 && transform.position.x - playerSpeedX*t>xMin.position.x)
+        float yOffset = .1f;
+        RaycastHit2D raycastHit = Physics2D.Raycast(col.bounds.center, Vector2.down, col.bounds.extents.y + yOffset);
+        Color rayColor;
+        if (raycastHit.collider != null)
         {
-            transform.position = new Vector3(transform.position.x - playerSpeedX * t, transform.position.y, transform.position.z);
+            rayColor = Color.green;
         }
-        if (Input.GetAxis("Horizontal") > 0 && transform.position.x + playerSpeedX * t < xMax.position.x)
-        {
-            transform.position = new Vector3(transform.position.x + playerSpeedX * t, transform.position.y, transform.position.z);
-        }
-        if (Input.GetAxis("Vertical") > 0 && transform.position.y + playerSpeedY * t < yMin.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y + playerSpeedY * t, transform.position.z);
-        }
-        if (Input.GetAxis("Vertical") < 0 && transform.position.y - playerSpeedY * t > yMax.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y - playerSpeedY * t, transform.position.z);
-        }
-        
-
-
-
+        else
+            rayColor = Color.red;
+        Debug.DrawRay(col.bounds.center, Vector2.down * (col.bounds.extents.y + yOffset),rayColor);
+        return raycastHit.collider != null;
     }
 
 }
