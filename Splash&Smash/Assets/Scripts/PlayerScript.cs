@@ -1,35 +1,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    private BoxCollider2D col;
+    public float playerSpeedX;
+    public float playerSpeedY;
+    public Transform xMin;
+    public Transform xMax;
+    public Transform yMin;
+    public Transform yMax;
+    private bool isJumping=false;
+    public float jumpSpeed;
+    private float curTime;
+
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<BoxCollider2D>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        bool ig = IsGrounded();
+        curTime = Time.deltaTime;
+        GetInput();
+        if (isJumping)
+            Jumping();
     }
 
-    bool IsGrounded()
+    void GetInput()
     {
-        float yOffset = .1f;
-        RaycastHit2D raycastHit = Physics2D.Raycast(col.bounds.center, Vector2.down, col.bounds.extents.y + yOffset);
-        Color rayColor;
-        if (raycastHit.collider != null)
+        
+        if (Input.GetAxis("Horizontal")<0 && transform.position.x - playerSpeedX* curTime > xMin.position.x)
         {
-            rayColor = Color.green;
+            transform.position = new Vector3(transform.position.x - playerSpeedX * curTime, transform.position.y, transform.position.z);
         }
-        else
-            rayColor = Color.red;
-        Debug.DrawRay(col.bounds.center, Vector2.down * (col.bounds.extents.y + yOffset),rayColor);
-        return raycastHit.collider != null;
+        if (Input.GetAxis("Horizontal") > 0 && transform.position.x + playerSpeedX * curTime < xMax.position.x)
+        {
+            transform.position = new Vector3(transform.position.x + playerSpeedX * curTime, transform.position.y, transform.position.z);
+        }
+        if (Input.GetAxis("Vertical") > 0 && transform.position.y + playerSpeedY * curTime < yMin.position.y)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + playerSpeedY * curTime, transform.position.z);
+        }
+        if (Input.GetAxis("Vertical") < 0 && transform.position.y - playerSpeedY * curTime > yMax.position.y)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y - playerSpeedY * curTime, transform.position.z);
+        }
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("asdfsfd");
+        if (collision.tag=="Wave")
+        {
+            isJumping = true;
+        }
+    }
+
+    void Jumping()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y + jumpSpeed* curTime, transform.position.z);
     }
 
 }
