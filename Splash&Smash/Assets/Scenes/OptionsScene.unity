@@ -1367,7 +1367,7 @@ GameObject:
   - component: {fileID: 1223358261}
   - component: {fileID: 1223358262}
   m_Layer: 5
-  m_Name: Music (1)
+  m_Name: SFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1998,8 +1998,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278230527
+  m_fontColor: {r: 1, g: 0.6167975, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2077,7 +2077,7 @@ GameObject:
   - component: {fileID: 1796660773}
   - component: {fileID: 1796660774}
   m_Layer: 5
-  m_Name: Music (2)
+  m_Name: Announcer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

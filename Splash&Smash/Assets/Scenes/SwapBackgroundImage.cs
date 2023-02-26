@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class SwapBackgroundImage : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SwapBackgroundImage : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerExitHandler
 {
 [SerializeField] private Sprite swapSprite;
 [SerializeField] private Image backgroundImage;
@@ -57,4 +57,10 @@ private IEnumerator FadeImage(float startAlpha, float endAlpha, float duration)
     color.a = endAlpha;
     backgroundImage.color = color;
 }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        LevelHandler levelHandler = GetComponent<LevelHandler>();
+        GameStateManager.Instance.currentLevelSO = levelHandler.levelSO;
+    }
 }

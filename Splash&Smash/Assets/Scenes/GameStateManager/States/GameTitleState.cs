@@ -14,6 +14,8 @@ public class GameTitleState : GameBaseState
             state.StartCoroutine(WaitForSceneToLoad());
             Debug.Log("Entered the Title State.");
         }
+
+        state.audioSourceHandler.announcerSource.PlayOneShot(state.audioSourceHandler.gameStartAnnoucement);
     }
 
     public override void UpdateState(GameStateManager state)

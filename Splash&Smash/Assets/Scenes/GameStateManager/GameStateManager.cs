@@ -16,7 +16,11 @@ public class GameStateManager : MonoBehaviour
     public GameOverState OverState = new GameOverState();
     public GameWonState WonState = new GameWonState();
 
+
+    public AudioSourceHandler audioSourceHandler;
+    public LevelSO currentLevelSO;
     public string currentScene;
+
 
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class GameStateManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+        audioSourceHandler = FindObjectOfType<AudioSourceHandler>();
     }
     
     void Start()
