@@ -39,6 +39,8 @@ public class WaveSpawner : MonoBehaviour
     private float startWaveTime;
     private float waveTime=2.5f; // how many seconds it takes the wave to 
 
+    public WaveBGScript mainWBS;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,7 +99,9 @@ public class WaveSpawner : MonoBehaviour
         wave7.transform.position = wave7Start;
         wave8.transform.position = wave8Start;
 
-        float scale = Random.Range(.6f, 2.8f);
+        float waveBGSpeed = mainWBS.waveSpeed;
+
+        float scale = Random.Range(.5f+waveBGSpeed, waveBGSpeed*5);
         wave1.transform.localScale = new Vector3(scale, scale, 1);
         wave2.transform.localScale = new Vector3(scale, scale, 1);
         wave3.transform.localScale = new Vector3(scale, scale, 1);

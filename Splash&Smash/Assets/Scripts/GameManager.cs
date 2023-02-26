@@ -18,6 +18,13 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    public void SetSpeedToZero()
+    {
+        var BGs=GameObject.FindObjectsByType<WaveBGScript>(FindObjectsSortMode.None);
+        foreach(WaveBGScript WBS in BGs)
+        {
+            WBS.waveSpeed = 0;
+        }
+    }
 
 }

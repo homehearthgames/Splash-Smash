@@ -44,7 +44,13 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxis("Horizontal") > 0 && transform.position.x + speed * curTime < xMax.position.x)
         {
             transform.position = new Vector3(transform.position.x + speed * curTime, transform.position.y, transform.position.z);
+            character.GetComponent<PlayerScript>().movementSpeed += character.GetComponent<PlayerScript>().movementAccel* curTime;
+            if (character.GetComponent<PlayerScript>().movementSpeed > character.GetComponent<PlayerScript>().maxMovementSpeed)
+                character.GetComponent<PlayerScript>().movementSpeed = character.GetComponent<PlayerScript>().maxMovementSpeed;
         }
+
+        if (!(Input.GetAxis("Horizontal") > 0)) // if not pressing right then movement speed=0
+            character.GetComponent<PlayerScript>().movementSpeed = 0;
 
 
         // only do vertical movement when not jumping
@@ -61,11 +67,11 @@ public class PlayerMovement : MonoBehaviour
         }
         else // player jumping so you and rotate
         {
-            if (Input.GetAxis("Vertical") > 0 && transform.position.y + playerSpeedY * curTime < yMin.position.y)
+            if (Input.GetAxis("Vertical") > 0)
             {
                 character.transform.localEulerAngles = new Vector3(0,0, character.transform.localEulerAngles.z+(curTime * rotSpeed));
             }
-            if (Input.GetAxis("Vertical") < 0 && transform.position.y - playerSpeedY * curTime > yMax.position.y)
+            if (Input.GetAxis("Vertical") < 0)
             {
                 character.transform.localEulerAngles = new Vector3(0, 0, character.transform.localEulerAngles.z-(curTime * rotSpeed));
             }

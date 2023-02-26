@@ -54,7 +54,7 @@ Material:
     - _GradientScale: 3
     - _RippleCount: 0.5
     - _RippleSpeed: 0.3
-    - _RippleStrength: 2
+    - _RippleStrength: 1.5
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DistortionPower: {r: 1, g: 1, b: 0, a: 0}

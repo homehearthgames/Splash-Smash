@@ -24,6 +24,12 @@ public class PlayerScript : MonoBehaviour
     public GameObject dude;
     private Animator dudeAnimator;
 
+    public ParticleSystem ripple;
+
+    public float movementSpeed;
+    public float movementAccel;
+    public float maxMovementSpeed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,22 +43,24 @@ public class PlayerScript : MonoBehaviour
         curTime = Time.deltaTime;
 
         GetInput();
-
-        if (isJumping)
-            Jumping();
     }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Collide with wave
         if (collision.tag=="Wave" && !isJumping)
         {
             Debug.Log("Hit wave");
+            ripple.gameObject.SetActive(false);
             isJumping = true;
-            float waveHeight = collision.transform.localScale.x;
+            float waveHeight = collision.transform.localScale.x*.8f;
             var seq = LeanTween.sequence();
 
-            seq.append(LeanTween.moveLocalY(gameObject, jumpHeight * waveHeight, jumpTime).setEase(LeanTweenType.easeOutExpo)); // jump up
+            seq.append(LeanTween.moveLocalY(gameObject, jumpHeight * waveHeight * (movementSpeed/2.7f+.9f), jumpTime).setEase(LeanTweenType.easeOutExpo)); // jump up
+
+            // hang time for movement speed
+            seq.append(movementSpeed*.7f);
 
             seq.append(LeanTween.moveLocalY(gameObject, 0, jumpTime).setEase(LeanTweenType.easeInExpo)); // jump down
             seq.append(() => { 
@@ -85,6 +93,8 @@ public class PlayerScript : MonoBehaviour
                 Debug.Log("Angle:" + transform.localEulerAngles.z+" dif:"+ Mathf.Clamp(MathF.Abs(0- transform.localEulerAngles.z), 0, 360));
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 isJumping = false;
+                movementSpeed = 0;
+                ripple.gameObject.SetActive(true);
             }); 
 
             seq.append(LeanTween.moveLocalY(gameObject, -.5f, .5f).setEase(LeanTweenType.easeOutExpo)); // dip down
@@ -92,7 +102,20 @@ public class PlayerScript : MonoBehaviour
             seq.append(LeanTween.moveLocalY(gameObject, 0, .5f).setEase(LeanTweenType.easeOutBounce)); // dip up
             Debug.Log("Wave size:" + waveHeight+" jump height: "+ (jumpHeight * waveHeight));
         }
-    }
+
+        // Collide with Obstacle
+        if (collision.tag == "Obstacle" && !isJumping)
+        {
+            movementSpeed = 0;
+            GameManager.gameManager.SetSpeedToZero();
+            // set random sound pitch and volume
+            collision.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(1 - .2f, 1 + .2f);
+            collision.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
+            collision.GetComponent<AudioSource>().Play();
+        }
+
+
+        }
 
     void ResetSplash()
     {
@@ -106,10 +129,6 @@ public class PlayerScript : MonoBehaviour
             yield return null;
         }
         splash.transform.position = transform.position;
-    }
-    void Jumping()
-    {
-        
     }
 
     void GetInput()
