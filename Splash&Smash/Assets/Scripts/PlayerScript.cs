@@ -75,18 +75,18 @@ public class PlayerScript : MonoBehaviour
 
                 ResetSplash();
                 float mult = 1.6f;
-                splash1.startSpeed = waveHeight * 3 + 2;
-                splash2.startSpeed = waveHeight * 3 + 2;
-                splash3.startSpeed = waveHeight * 3 + 2;
+                splash1.startSpeed = waveHeight * 2 + 1.2f;
+                splash2.startSpeed = waveHeight * 2 + 1.2f;
+                splash3.startSpeed = waveHeight * 2 + 1.2f;
 
-                splash1.maxParticles = (int)(waveHeight * 150);
-                splash2.maxParticles = (int)(waveHeight * 150);
-                splash3.maxParticles = (int)(waveHeight * 150);
+                splash1.maxParticles = (int)(waveHeight * 80);
+                splash2.maxParticles = (int)(waveHeight * 80);
+                splash3.maxParticles = (int)(waveHeight * 80);
+
+                splash3.startSize = 1;
+
                 //transform.localScale = new Vector3(waveHeight*mult, waveHeight * mult, 1);
-                splash1.Play();
-                splash2.Play();
-                splash3.Play();
-                splash4.Play();
+
                 // hide shadow
                 shadow.SetActive(false);
             }); ;
@@ -102,11 +102,29 @@ public class PlayerScript : MonoBehaviour
 
                     // really bad landing
                     if (transform.localEulerAngles.z > 90 && transform.localEulerAngles.z < 360 - 90)
+                    {
                         GameManager.gameManager.SetSpeed(0);
+                        // big splash
+                        splash1.startSpeed = waveHeight * 6 + 1.2f;
+                        splash2.startSpeed = waveHeight * 6 + 1.2f;
+                        splash3.startSpeed = waveHeight * 6 + 1.2f;
+
+                        splash1.maxParticles = (int)(666);
+                        splash2.maxParticles = (int)(666);
+                        splash3.maxParticles = (int)(666);
+
+                        splash3.startSize = 2.3f;
+
+                    }
                     else // sorta bad landing
                         GameManager.gameManager.SetSpeed(.2f);
 
                 }
+
+                splash1.Play();
+                splash2.Play();
+                splash3.Play();
+                splash4.Play();
 
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 isJumping = false;

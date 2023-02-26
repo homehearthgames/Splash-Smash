@@ -11,6 +11,9 @@ public class ObstacleSpawner : MonoBehaviour
     public GameObject obs;
     private bool isMoving=false;
     public float speed;
+
+    public Sprite[] obsSpr;
+
     void Start()
     {
         startObsTime = Time.time + Random.Range(0, 5.4f);
@@ -26,7 +29,9 @@ public class ObstacleSpawner : MonoBehaviour
             int y = Random.Range(0, -4);
             obs.transform.localPosition = new Vector3(0,y,obs.transform.localPosition.z);
             isMoving = true;
-            //Debug.LogError("Move Obs");
+            // pick random obstacle sprite
+            int sprNum = Random.Range(0, obsSpr.Length);
+            obs.GetComponent<SpriteRenderer>().sprite = obsSpr[sprNum];
         }
 
         if (isMoving)
