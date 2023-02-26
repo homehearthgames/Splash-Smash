@@ -10554,6 +10554,7 @@ MonoBehaviour:
   movementSpeed: 0
   movementAccel: 1.5
   maxMovementSpeed: 2
+  goodLandingRange: 20
 --- !u!50 &302513515
 Rigidbody2D:
   serializedVersion: 4

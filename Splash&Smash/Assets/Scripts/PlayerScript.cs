@@ -30,6 +30,8 @@ public class PlayerScript : MonoBehaviour
     public float movementAccel;
     public float maxMovementSpeed;
 
+    public int goodLandingRange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -91,6 +93,21 @@ public class PlayerScript : MonoBehaviour
 
             seq.append(() => { //Reset player angle
                 Debug.Log("Angle:" + transform.localEulerAngles.z+" dif:"+ Mathf.Clamp(MathF.Abs(0- transform.localEulerAngles.z), 0, 360));
+
+                // slow down if you don't land within +- goodLandingRange degrees
+                if (transform.localEulerAngles.z> goodLandingRange && transform.localEulerAngles.z<360- goodLandingRange)
+                {
+                    // ToDo: play splash / bad landing sound
+
+
+                    // really bad landing
+                    if (transform.localEulerAngles.z > 90 && transform.localEulerAngles.z < 360 - 90)
+                        GameManager.gameManager.SetSpeed(0);
+                    else // sorta bad landing
+                        GameManager.gameManager.SetSpeed(.2f);
+
+                }
+
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 isJumping = false;
                 movementSpeed = 0;
@@ -107,7 +124,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.tag == "Obstacle" && !isJumping)
         {
             movementSpeed = 0;
-            GameManager.gameManager.SetSpeedToZero();
+            GameManager.gameManager.SetSpeed(0);
             // set random sound pitch and volume
             collision.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(1 - .2f, 1 + .2f);
             collision.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
