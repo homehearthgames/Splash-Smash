@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using DentedPixel;
+using TMPro;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -32,6 +33,14 @@ public class PlayerScript : MonoBehaviour
 
     public int goodLandingRange;
 
+    private float trickStartTime;
+    private float trickEndTime;
+    public int trickPoints;
+    public GameObject trickPointsObj;
+    public GameObject scoreObj;
+
+    public Canvas canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +66,9 @@ public class PlayerScript : MonoBehaviour
             ripple.gameObject.SetActive(false);
             isJumping = true;
             float waveHeight = collision.transform.localScale.x*.8f;
+
+            trickStartTime = Time.time;
+
             var seq = LeanTween.sequence();
 
             seq.append(LeanTween.moveLocalY(gameObject, jumpHeight * waveHeight * (movementSpeed/2.7f+.9f), jumpTime).setEase(LeanTweenType.easeOutExpo)); // jump up
@@ -119,6 +131,18 @@ public class PlayerScript : MonoBehaviour
                     else // sorta bad landing
                         GameManager.gameManager.SetSpeed(.2f);
 
+                }
+                else // good landing
+                {
+                    trickEndTime = Time.time;
+                    trickPoints = (int)((trickEndTime - trickStartTime)*10);
+                    
+
+                    // put point text at player pos
+                    //trickPointsObj.transform.position = new Vector3(Camera.main.WorldToScreenPoint(player.transform.position).x, Camera.main.WorldToScreenPoint(player.transform.position).y);
+                    GameObject pObj=Instantiate(trickPointsObj, canvas.transform);
+                    pObj.GetComponent<TMP_Text>().text = trickPoints.ToString();
+                    scoreObj.GetComponent<ScoreScript>().AddToScore(trickPoints);
                 }
 
                 splash1.Play();
