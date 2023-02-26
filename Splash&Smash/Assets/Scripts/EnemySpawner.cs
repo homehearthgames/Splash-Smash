@@ -40,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
             // pick random enemy sprite
             sprNum = Random.Range(0, enemySpr.Length);
             enemyObj.GetComponent<SpriteRenderer>().sprite = enemySpr[sprNum];
+
         }
 
         if (isMoving)

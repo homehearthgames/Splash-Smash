@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OptionsScene.unity
     guid: 41f874dea46b8564d9da742213d0cbd3
+  - enabled: 1
+    path: Assets/Scenes/JumanjiJungleScene.unity
+    guid: 7f40dd3cc2bc12148a1cd1e45c1183c3
+  - enabled: 1
+    path: Assets/Scenes/SantoriniSunsetScene.unity
+    guid: 9abb6a4b34cb73047915901e4b99853e
   m_configObjects: {}

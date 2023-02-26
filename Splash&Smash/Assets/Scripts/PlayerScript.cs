@@ -24,6 +24,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject player;
     public GameObject dude;
     private Animator dudeAnimator;
+    public Animator weaponAnimator;
+
 
     public ParticleSystem ripple;
 
@@ -202,6 +204,20 @@ public class PlayerScript : MonoBehaviour
             dudeAnimator.SetBool("Trick2", true);
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire3"))
+        {
+            // Call the PlayerAttack function
+            PlayerAttack();
+
+        }
+
+    }
+
+    void PlayerAttack()
+    {
+        weaponAnimator.SetTrigger("Attack");
+        weaponAnimator.GetComponent<Collider2D>().enabled = true;
+        weaponAnimator.GetComponent<Collider2D>().enabled = false;
     }
 
 }

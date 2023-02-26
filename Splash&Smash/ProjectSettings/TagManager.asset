@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Wave
   - Obstacle
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
