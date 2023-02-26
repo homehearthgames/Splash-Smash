@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-
+    public WaveBGScript mainWBS; // used to get the player's aprox speed 0-.5
     public float obsFreq;
     private float startObsTime;
     private float curTime;
@@ -41,7 +41,8 @@ public class ObstacleSpawner : MonoBehaviour
     void MoveObs()
     {
         float t = Time.deltaTime;
-        obs.transform.position = new Vector3(obs.transform.position.x - speed * t, obs.transform.position.y, obs.transform.position.z);
+        float waveBGSpeed = mainWBS.waveSpeed;
+        obs.transform.position = new Vector3(obs.transform.position.x - speed * t* waveBGSpeed, obs.transform.position.y, obs.transform.position.z);
         if (obs.transform.position.x < -20)
             isMoving = false;
         startObsTime = Time.time + Random.Range(0, 5.4f);
