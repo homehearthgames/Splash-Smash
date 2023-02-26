@@ -8,10 +8,13 @@ public class PlayerMovement : MonoBehaviour
 
     public float playerSpeedX;
     public float playerSpeedY;
+    public float rotSpeed;
     public Transform xMin;
     public Transform xMax;
     public Transform yMin;
     public Transform yMax;
+
+    public GameObject character;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,17 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("Vertical") < 0 && transform.position.y - playerSpeedY * curTime > yMax.position.y)
             {
                 transform.position = new Vector3(transform.position.x, transform.position.y - playerSpeedY * curTime, transform.position.z);
+            }
+        }
+        else // player jumping so you and rotate
+        {
+            if (Input.GetAxis("Vertical") > 0 && transform.position.y + playerSpeedY * curTime < yMin.position.y)
+            {
+                character.transform.localEulerAngles = new Vector3(0,0, character.transform.localEulerAngles.z+(curTime * rotSpeed));
+            }
+            if (Input.GetAxis("Vertical") < 0 && transform.position.y - playerSpeedY * curTime > yMax.position.y)
+            {
+                character.transform.localEulerAngles = new Vector3(0, 0, character.transform.localEulerAngles.z-(curTime * rotSpeed));
             }
         }
 

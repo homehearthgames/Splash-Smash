@@ -18,17 +18,25 @@ public class PlayerScript : MonoBehaviour
     public ParticleSystem splash4;
 
     public GameObject splash;
+    public GameObject shadow;
+
+    public GameObject player;
+    public GameObject dude;
+    private Animator dudeAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        player = GameObject.FindWithTag("Player");
+        dudeAnimator = dude.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         curTime = Time.deltaTime;
+
+        GetInput();
 
         if (isJumping)
             Jumping();
@@ -42,13 +50,19 @@ public class PlayerScript : MonoBehaviour
             Debug.Log("Hit wave");
             isJumping = true;
             float waveHeight = collision.transform.localScale.x;
-            var seq = LeanTween.sequence(); 
+            var seq = LeanTween.sequence();
+
             seq.append(LeanTween.moveLocalY(gameObject, jumpHeight * waveHeight, jumpTime).setEase(LeanTweenType.easeOutExpo)); // jump up
 
             seq.append(LeanTween.moveLocalY(gameObject, 0, jumpTime).setEase(LeanTweenType.easeInExpo)); // jump down
-            seq.append(() => { // fire event after tween
+            seq.append(() => { 
                 Debug.Log("Landed");
                 isJumping = false;
+
+                // idle dude
+                dudeAnimator.SetBool("Trick1", false);
+                dude.GetComponent<Animator>().SetBool("Trick2", false);
+
                 ResetSplash();
                 float mult = 1.6f;
                 splash1.startSpeed = waveHeight * 3 + 2;
@@ -63,11 +77,19 @@ public class PlayerScript : MonoBehaviour
                 splash2.Play();
                 splash3.Play();
                 splash4.Play();
+                // hide shadow
+                shadow.SetActive(false);
             }); ;
-            seq.append(LeanTween.moveLocalY(gameObject, -1, 1).setEase(LeanTweenType.easeOutExpo)); // dip down
-            seq.append(LeanTween.moveLocalY(gameObject, 0, 1).setEase(LeanTweenType.easeOutBounce)); // dip up
 
+            seq.append(() => { //Reset player angle
+                Debug.Log("Angle:" + transform.localEulerAngles.z+" dif:"+ Mathf.Clamp(MathF.Abs(0- transform.localEulerAngles.z), 0, 360));
+                transform.localEulerAngles = new Vector3(0, 0, 0);
+                isJumping = false;
+            }); 
 
+            seq.append(LeanTween.moveLocalY(gameObject, -.5f, .5f).setEase(LeanTweenType.easeOutExpo)); // dip down
+            seq.append(() => { shadow.SetActive(true); }); //show shadow
+            seq.append(LeanTween.moveLocalY(gameObject, 0, .5f).setEase(LeanTweenType.easeOutBounce)); // dip up
             Debug.Log("Wave size:" + waveHeight+" jump height: "+ (jumpHeight * waveHeight));
         }
     }
@@ -88,6 +110,20 @@ public class PlayerScript : MonoBehaviour
     void Jumping()
     {
         
+    }
+
+    void GetInput()
+    {
+        if (Input.GetButton("Fire1") && !isJumping && dudeAnimator.GetBool("Trick1")==false && dudeAnimator.GetBool("Trick2") == false)
+        {
+            dudeAnimator.SetBool("Trick1", true);
+        }
+
+        if (Input.GetButton("Fire2") && !isJumping && dudeAnimator.GetBool("Trick1") == false && dudeAnimator.GetBool("Trick2") == false)
+        {
+            dudeAnimator.SetBool("Trick2", true);
+        }
+
     }
 
 }

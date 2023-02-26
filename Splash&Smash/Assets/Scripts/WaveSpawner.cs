@@ -37,7 +37,7 @@ public class WaveSpawner : MonoBehaviour
 
     public float waveFreq;
     private float startWaveTime;
-    private float waveTime=2; // how many seconds it takes the wave to 
+    private float waveTime=2.5f; // how many seconds it takes the wave to 
 
     // Start is called before the first frame update
     void Start()
