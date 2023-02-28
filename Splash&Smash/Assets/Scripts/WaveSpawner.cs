@@ -58,33 +58,34 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-            StartWave();
 
-        if (Time.time> startWaveTime+waveFreq && !isWaveStarted)
+        if (Time.time > startWaveTime + waveFreq && !isWaveStarted)
             StartWave();
-
-        if (Time.time > startWaveTime + waveFreq + waveTime + Random.Range(0, 2.1f))
+        else
         {
-            isWaveStarted = false;
-            startWaveTime = Time.time;
-        }
+            if (Time.time > startWaveTime + waveFreq + waveTime + Random.Range(0, 2.1f))
+            {
+                isWaveStarted = false;
+                startWaveTime = Time.time;
+            }
 
-            if (isWaveStarted)
-            MoveWaves();
+            if (isWaveStarted) // move waves
+                MoveWaves();
+
+        }
     }
 
     void MoveWaves()
     {
-        float t = Time.deltaTime;
-        wave1.transform.position = new Vector3(wave1.transform.position.x - wave1Speed * waveSpeedMultiplier * t, wave1.transform.position.y, wave1.transform.position.z);
-        wave2.transform.position = new Vector3(wave2.transform.position.x - wave2Speed * waveSpeedMultiplier * t, wave2.transform.position.y, wave2.transform.position.z);
-        wave3.transform.position = new Vector3(wave3.transform.position.x - wave3Speed * waveSpeedMultiplier * t, wave3.transform.position.y, wave3.transform.position.z);
-        wave4.transform.position = new Vector3(wave4.transform.position.x - wave4Speed * waveSpeedMultiplier * t, wave4.transform.position.y, wave4.transform.position.z);
-        wave5.transform.position = new Vector3(wave5.transform.position.x - wave5Speed * waveSpeedMultiplier * t, wave5.transform.position.y, wave5.transform.position.z);
-        wave6.transform.position = new Vector3(wave6.transform.position.x - wave6Speed * waveSpeedMultiplier * t, wave6.transform.position.y, wave6.transform.position.z);
-        wave7.transform.position = new Vector3(wave7.transform.position.x - wave7Speed * waveSpeedMultiplier * t, wave7.transform.position.y, wave7.transform.position.z);
-        wave8.transform.position = new Vector3(wave8.transform.position.x - wave8Speed * waveSpeedMultiplier * t, wave8.transform.position.y, wave8.transform.position.z);
+        float t = Time.deltaTime* waveSpeedMultiplier;
+        wave1.transform.position = new Vector3(wave1.transform.position.x - wave1Speed * t, wave1.transform.position.y);
+        wave2.transform.position = new Vector3(wave2.transform.position.x - wave2Speed * t, wave2.transform.position.y);
+        wave3.transform.position = new Vector3(wave3.transform.position.x - wave3Speed * t, wave3.transform.position.y);
+        wave4.transform.position = new Vector3(wave4.transform.position.x - wave4Speed * t, wave4.transform.position.y);
+        wave5.transform.position = new Vector3(wave5.transform.position.x - wave5Speed * t, wave5.transform.position.y);
+        wave6.transform.position = new Vector3(wave6.transform.position.x - wave6Speed * t, wave6.transform.position.y);
+        wave7.transform.position = new Vector3(wave7.transform.position.x - wave7Speed * t, wave7.transform.position.y);
+        wave8.transform.position = new Vector3(wave8.transform.position.x - wave8Speed * t, wave8.transform.position.y);
     }
 
     private void StartWave()

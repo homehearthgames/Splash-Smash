@@ -12,9 +12,12 @@ public class EnemyScript : MonoBehaviour
     public WaveBGScript mainWBS; // used to get the player's aprox speed 0-.5
     public float speed;
     public GameObject enemySpawner;
+    private GameObject player;
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        Debug.LogWarning("Player:" + player.name);
         SetClip();
     }
 
@@ -29,10 +32,7 @@ public class EnemyScript : MonoBehaviour
         //Debug.LogWarning("Col:"+collision.tag);
         if (collision.tag=="Weapon")
         {
-            
-            GameObject pObj = Instantiate(trickPointsObj, canvas.transform);
-            pObj.GetComponent<TMP_Text>().text = "50";
-            scoreObj.GetComponent<ScoreScript>().AddToScore(50);
+            player.GetComponent<PlayerMovement>().character.GetComponent<PlayerScript>().AddPoints(50);
             KillEnemy();
         }
 

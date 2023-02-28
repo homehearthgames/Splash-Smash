@@ -122,24 +122,30 @@ public class PlayerScript : MonoBehaviour
                     
                         Debug.Log("bad landing");
                         GameManager.gameManager.SetSpeed(0);
-                        // big splash
-                        splash1.startSpeed = waveHeight * 6 + 1.2f;
-                        splash2.startSpeed = waveHeight * 6 + 1.2f;
-                        splash3.startSpeed = waveHeight * 6 + 1.2f;
+                    // big splash
+                    splash1.startSpeed = waveHeight * 6 + 1.2f;
+                    splash2.startSpeed = waveHeight * 6 + 1.2f;
+                    splash3.startSpeed = waveHeight * 6 + 1.2f;
 
-                        var main = splash1.main;
-                        main.maxParticles = (int)(666);
-                        main = splash2.main;
-                        main.maxParticles = (int)(666);
-                        main = splash3.main;
-                        main.maxParticles = (int)(666);
+                    var main = splash1.main;
+                    main.maxParticles = (int)(666);
+                    main = splash2.main;
+                    main.maxParticles = (int)(666);
+                    main = splash3.main;
+                    main.maxParticles = (int)(666);
+                    splash3.startSize = 2.3f;
+                    // play sound
+                    GameObject wav = GameObject.FindGameObjectWithTag("Wave");
 
-                        splash3.startSize = 2.3f;
+                    wav.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(1 - .2f, 1 + .2f);
+                    wav.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
+                    wav.GetComponent<AudioSource>().Play();
+
                 }
                 else // good landing
                 {
                     Debug.Log("Good Landing");
-                    CalcPoints(curTrickPoints);
+                    AddPoints(curTrickPoints);
 
                 }
 
@@ -166,11 +172,9 @@ public class PlayerScript : MonoBehaviour
 
         }
 
-    private void CalcPoints(float pts)
+    public void AddPoints(float pts)
     {
         trickPoints = (int)(pts);
-
-
         // put point text at player pos
         //trickPointsObj.transform.position = new Vector3(Camera.main.WorldToScreenPoint(player.transform.position).x, Camera.main.WorldToScreenPoint(player.transform.position).y);
         if (trickPoints > 0)
@@ -189,6 +193,20 @@ public class PlayerScript : MonoBehaviour
         collision.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(1 - .2f, 1 + .2f);
         collision.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
         collision.GetComponent<AudioSource>().Play();
+
+        // splash particles
+        splash1.startSpeed = 2 * 6 + 1.2f;
+        splash2.startSpeed = 2 * 6 + 1.2f;
+        splash3.startSpeed = 2 * 6 + 1.2f;
+
+        var main = splash1.main;
+        main.maxParticles = (int)(666);
+        main = splash2.main;
+        main.maxParticles = (int)(666);
+        main = splash3.main;
+        main.maxParticles = (int)(666);
+
+        splash3.startSize = 2.3f;
     }
 
     void ResetSplash()
@@ -220,7 +238,7 @@ public class PlayerScript : MonoBehaviour
             {
                 dudeAnimator.SetBool("Trick1", false);
                 trickEndTime = Time.time;
-                CalcPoints((trickEndTime- trickStartTime)*20.5f);
+                AddPoints((trickEndTime- trickStartTime)*20.5f);
             }
         }
 
@@ -236,7 +254,7 @@ public class PlayerScript : MonoBehaviour
             {
                 dudeAnimator.SetBool("Trick2", false);
                 trickEndTime = Time.time;
-                CalcPoints((trickEndTime - trickStartTime)*20.5f);
+                AddPoints((trickEndTime - trickStartTime)*20.5f);
             }
         }
 

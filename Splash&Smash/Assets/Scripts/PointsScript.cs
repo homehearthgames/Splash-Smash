@@ -11,12 +11,21 @@ public class PointsScript : MonoBehaviour
     private RectTransform rect;
     public float textSpeed;
     private float alpha = 255;
+    private GameObject player;
 
+    private RectTransform canvasRT;
+    private Vector3 roboScreenPos;
 
     void Start()
     {
         rect = GetComponent<RectTransform>();
 
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        canvasRT = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        roboScreenPos = Camera.main.WorldToViewportPoint(player.transform.TransformPoint(new Vector3(0,-.7f,0)));
+        rect.anchorMax = roboScreenPos;
+        rect.anchorMin = roboScreenPos;
     }
 
     // Update is called once per frame
@@ -27,7 +36,7 @@ public class PointsScript : MonoBehaviour
             pointsMoving = true;
             rect.position = new Vector2(rect.position.x, rect.position.y + textSpeed*6);
             if (rect.localScale.x>.1f)
-                rect.localScale = new Vector3(rect.localScale.x - textSpeed/4, rect.localScale.x - textSpeed/4, rect.localScale.x - textSpeed/4);
+                rect.localScale = new Vector3(rect.localScale.x + textSpeed/4, rect.localScale.x + textSpeed/4);
 
             //GetComponent<TMP_Text>().color = new Color(255, 255, 255, GetComponent<TMP_Text>().color.a-1);
         }
