@@ -73,18 +73,18 @@ public class PlayerMovement : MonoBehaviour
                 character.transform.localEulerAngles = new Vector3(0,0, character.transform.localEulerAngles.z+(curTime * rotSpeed));
                 // get points
                 if (dudeAnimator.GetBool("Trick1") == true || dudeAnimator.GetBool("Trick2") == true)
-                    GetComponentInChildren<PlayerScript>().curTrickPoints += 1;
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += 150f * curTime;
                 else
-                    GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += 104f * curTime;
             }
             if (Input.GetAxis("Vertical") < 0)
             {
                 character.transform.localEulerAngles = new Vector3(0, 0, character.transform.localEulerAngles.z-(curTime * rotSpeed));
                 // get points
                 if (dudeAnimator.GetBool("Trick1") == true || dudeAnimator.GetBool("Trick2") == true)
-                    GetComponentInChildren<PlayerScript>().curTrickPoints += 1;
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += 150f * curTime;
                 else
-                    GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += 104f * curTime;
             }
         }
 

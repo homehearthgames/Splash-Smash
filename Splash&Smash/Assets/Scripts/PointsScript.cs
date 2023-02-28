@@ -10,14 +10,17 @@ public class PointsScript : MonoBehaviour
     // Start is called before the first frame update
     private RectTransform rect;
     public float textSpeed;
-    private float alpha = 255;
     private GameObject player;
 
     private RectTransform canvasRT;
     private Vector3 roboScreenPos;
 
+    private Transform score;
+    public int trickPoints = 0;
+
     void Start()
     {
+        score = GameObject.Find("Score").transform;
         rect = GetComponent<RectTransform>();
 
         player = GameObject.FindGameObjectWithTag("Player");
@@ -31,18 +34,21 @@ public class PointsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetComponent<TMP_Text>().text!="" ) // is text has text
+        if (GetComponent<TMP_Text>().text!="" && !pointsMoving) // is text has text
         {
             pointsMoving = true;
             rect.position = new Vector2(rect.position.x, rect.position.y + textSpeed*6);
-            if (rect.localScale.x>.1f)
-                rect.localScale = new Vector3(rect.localScale.x + textSpeed/4, rect.localScale.x + textSpeed/4);
 
-            //GetComponent<TMP_Text>().color = new Color(255, 255, 255, GetComponent<TMP_Text>().color.a-1);
+            LeanTween.move(gameObject, score.position + new Vector3(-50, 0, 0), 2.2f).setOnComplete(AddToScore);
         }
     }
 
-
+    void AddToScore()
+    {
+        Debug.Log("add");
+        score.GetComponent<ScoreScript>().AddToScore(trickPoints);
+        Destroy(gameObject);
+    }
 
 
 }

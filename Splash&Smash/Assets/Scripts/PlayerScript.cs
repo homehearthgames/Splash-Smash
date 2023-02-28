@@ -184,13 +184,16 @@ public class PlayerScript : MonoBehaviour
     public void AddPoints(float pts)
     {
         trickPoints = (int)(pts);
+        trickPoints = trickPoints / 10;
+        trickPoints = trickPoints * 10;
+
         // put point text at player pos
         //trickPointsObj.transform.position = new Vector3(Camera.main.WorldToScreenPoint(player.transform.position).x, Camera.main.WorldToScreenPoint(player.transform.position).y);
         if (trickPoints > 0)
         {
             GameObject pObj = Instantiate(trickPointsObj, canvas.transform);
             pObj.GetComponent<TMP_Text>().text = trickPoints.ToString();
-            scoreObj.GetComponent<ScoreScript>().AddToScore(trickPoints);
+            pObj.GetComponent<PointsScript>().trickPoints = trickPoints;
 
             // radical [0]  Extreme [1]   Sick[2]   Awesome[3]   Great[4]   Good[5]    Too Bad[6]   Awweful[7]
             int s = 0;
@@ -203,10 +206,10 @@ public class PlayerScript : MonoBehaviour
                 if (trickPoints < 250)
                 s = 3;
             else
-                if (trickPoints < 300)
+                if (trickPoints < 350)
                 s = 2;
             else
-                if (trickPoints < 350)
+                if (trickPoints < 450)
                 s = 1;
             else
                 s = 0;
@@ -259,7 +262,7 @@ public class PlayerScript : MonoBehaviour
     void GetInput()
     {
         // Tricks
-        if (Input.GetButtonDown("Fire1") && !isJumping)
+        if (Input.GetButtonDown("Fire1"))
         {
             if (dudeAnimator.GetBool("Trick1") == false)
             {
@@ -275,7 +278,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Fire2") && !isJumping)
+        if (Input.GetButtonDown("Fire2"))
         {
             if (dudeAnimator.GetBool("Trick2") == false)
             {
