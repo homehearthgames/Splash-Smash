@@ -39,6 +39,8 @@ public class PlayerScript : MonoBehaviour
     public float curTrickPoints;
     public GameObject trickPointsObj;
     public GameObject scoreObj;
+    private float trickStartTime;
+    private float trickEndTime;
 
     public Canvas canvas;
 
@@ -66,6 +68,11 @@ public class PlayerScript : MonoBehaviour
             startAngle = transform.localEulerAngles.z;
 
             curTrickPoints = 0;
+
+            // if you are doing a trick when you hit the wave, you crash
+            if (dudeAnimator.GetBool("Trick1") || dudeAnimator.GetBool("Trick2"))
+                WipeOut(collision);
+
 
             Debug.Log("Hit wave");
             ripple.gameObject.SetActive(false);
@@ -110,14 +117,10 @@ public class PlayerScript : MonoBehaviour
                 Debug.Log("Angle:" + transform.localEulerAngles.z+" dif:"+ Mathf.Clamp(MathF.Abs(0- transform.localEulerAngles.z), 0, 360));
 
                 // slow down if you don't land within +- goodLandingRange degrees
-                if (transform.localEulerAngles.z> goodLandingRange && transform.localEulerAngles.z<360- goodLandingRange)
+                if (transform.localEulerAngles.z > 45 && transform.localEulerAngles.z < 360 - 45)
                 {
-                    // ToDo: play splash / bad landing sound
-
-
-                    // really bad landing
-                    if (transform.localEulerAngles.z > 90 && transform.localEulerAngles.z < 360 - 90)
-                    {
+                    
+                        Debug.Log("bad landing");
                         GameManager.gameManager.SetSpeed(0);
                         // big splash
                         splash1.startSpeed = waveHeight * 6 + 1.2f;
@@ -132,23 +135,12 @@ public class PlayerScript : MonoBehaviour
                         main.maxParticles = (int)(666);
 
                         splash3.startSize = 2.3f;
-
-                    }
-                    else // sorta bad landing
-                        GameManager.gameManager.SetSpeed(.2f);
-
                 }
                 else // good landing
                 {
+                    Debug.Log("Good Landing");
+                    CalcPoints(curTrickPoints);
 
-                    trickPoints = (int)(curTrickPoints);
-                    
-
-                    // put point text at player pos
-                    //trickPointsObj.transform.position = new Vector3(Camera.main.WorldToScreenPoint(player.transform.position).x, Camera.main.WorldToScreenPoint(player.transform.position).y);
-                    GameObject pObj=Instantiate(trickPointsObj, canvas.transform);
-                    pObj.GetComponent<TMP_Text>().text = trickPoints.ToString();
-                    scoreObj.GetComponent<ScoreScript>().AddToScore(trickPoints);
                 }
 
                 splash1.Play();
@@ -170,17 +162,34 @@ public class PlayerScript : MonoBehaviour
 
         // Collide with Obstacle
         if (collision.tag == "Obstacle" && !isJumping)
+            WipeOut(collision);
+
+        }
+
+    private void CalcPoints(float pts)
+    {
+        trickPoints = (int)(pts);
+
+
+        // put point text at player pos
+        //trickPointsObj.transform.position = new Vector3(Camera.main.WorldToScreenPoint(player.transform.position).x, Camera.main.WorldToScreenPoint(player.transform.position).y);
+        if (trickPoints > 0)
         {
-            movementSpeed = 0;
-            GameManager.gameManager.SetSpeed(0);
-            // set random sound pitch and volume
-            collision.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(1 - .2f, 1 + .2f);
-            collision.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
-            collision.GetComponent<AudioSource>().Play();
+            GameObject pObj = Instantiate(trickPointsObj, canvas.transform);
+            pObj.GetComponent<TMP_Text>().text = trickPoints.ToString();
+            scoreObj.GetComponent<ScoreScript>().AddToScore(trickPoints);
         }
+    }
 
-
-        }
+    private void WipeOut(Collider2D collision)
+    {
+        movementSpeed = 0;
+        GameManager.gameManager.SetSpeed(0);
+        // set random sound pitch and volume
+        collision.GetComponent<AudioSource>().pitch = UnityEngine.Random.Range(1 - .2f, 1 + .2f);
+        collision.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
+        collision.GetComponent<AudioSource>().Play();
+    }
 
     void ResetSplash()
     {
@@ -198,16 +207,40 @@ public class PlayerScript : MonoBehaviour
 
     void GetInput()
     {
-        if (Input.GetButton("Fire1") && !isJumping && dudeAnimator.GetBool("Trick1")==false && dudeAnimator.GetBool("Trick2") == false)
+        // Tricks
+        if (Input.GetButtonDown("Fire1") && !isJumping)
         {
-            dudeAnimator.SetBool("Trick1", true);
+            if (dudeAnimator.GetBool("Trick1") == false)
+            {
+                dudeAnimator.SetBool("Trick1", true);
+                dudeAnimator.SetBool("Trick2", false);
+                trickStartTime = Time.time;
+            }
+            else
+            {
+                dudeAnimator.SetBool("Trick1", false);
+                trickEndTime = Time.time;
+                CalcPoints((trickEndTime- trickStartTime)*20.5f);
+            }
         }
 
-        if (Input.GetButton("Fire2") && !isJumping && dudeAnimator.GetBool("Trick1") == false && dudeAnimator.GetBool("Trick2") == false)
+        if (Input.GetButtonDown("Fire2") && !isJumping)
         {
-            dudeAnimator.SetBool("Trick2", true);
+            if (dudeAnimator.GetBool("Trick2") == false)
+            {
+                dudeAnimator.SetBool("Trick2", true);
+                dudeAnimator.SetBool("Trick1", false);
+                trickStartTime = Time.time;
+            }
+            else
+            {
+                dudeAnimator.SetBool("Trick2", false);
+                trickEndTime = Time.time;
+                CalcPoints((trickEndTime - trickStartTime)*20.5f);
+            }
         }
 
+        // attack
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire3"))
         {
             // Call the PlayerAttack function

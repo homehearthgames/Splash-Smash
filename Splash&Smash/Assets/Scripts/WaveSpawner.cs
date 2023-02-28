@@ -101,7 +101,7 @@ public class WaveSpawner : MonoBehaviour
 
         float waveBGSpeed = mainWBS.waveSpeed;
 
-        float scale = Random.Range(.5f+waveBGSpeed, waveBGSpeed*5);
+        float scale = Random.Range(1.5f+waveBGSpeed, 1.5f + waveBGSpeed *4);
         wave1.transform.localScale = new Vector3(scale, scale, 1);
         wave2.transform.localScale = new Vector3(scale, scale, 1);
         wave3.transform.localScale = new Vector3(scale, scale, 1);

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform yMax;
 
     public GameObject character;
+    public Animator dudeAnimator;
     // Start is called before the first frame update
     void Start()
     {
@@ -70,12 +71,20 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("Vertical") > 0)
             {
                 character.transform.localEulerAngles = new Vector3(0,0, character.transform.localEulerAngles.z+(curTime * rotSpeed));
-                GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
+                // get points
+                if (dudeAnimator.GetBool("Trick1") == true || dudeAnimator.GetBool("Trick2") == true)
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += 1;
+                else
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
             }
             if (Input.GetAxis("Vertical") < 0)
             {
                 character.transform.localEulerAngles = new Vector3(0, 0, character.transform.localEulerAngles.z-(curTime * rotSpeed));
-                GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
+                // get points
+                if (dudeAnimator.GetBool("Trick1") == true || dudeAnimator.GetBool("Trick2") == true)
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += 1;
+                else
+                    GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
             }
         }
 
