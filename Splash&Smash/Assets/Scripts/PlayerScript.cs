@@ -44,6 +44,8 @@ public class PlayerScript : MonoBehaviour
 
     public Canvas canvas;
 
+    public AudioClip[] ComboSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,7 +73,11 @@ public class PlayerScript : MonoBehaviour
 
             // if you are doing a trick when you hit the wave, you crash
             if (dudeAnimator.GetBool("Trick1") || dudeAnimator.GetBool("Trick2"))
+            {
                 WipeOut(collision);
+                GetComponent<AudioSource>().clip = ComboSound[6]; // "Too bad"
+                GetComponent<AudioSource>().Play();
+            }
 
 
             Debug.Log("Hit wave");
@@ -141,6 +147,9 @@ public class PlayerScript : MonoBehaviour
                     wav.GetComponent<AudioSource>().volume = UnityEngine.Random.Range(1 - .4f, 1);
                     wav.GetComponent<AudioSource>().Play();
 
+                    GetComponent<AudioSource>().clip = ComboSound[7]; // Aweful
+                    GetComponent<AudioSource>().Play();
+
                 }
                 else // good landing
                 {
@@ -182,6 +191,30 @@ public class PlayerScript : MonoBehaviour
             GameObject pObj = Instantiate(trickPointsObj, canvas.transform);
             pObj.GetComponent<TMP_Text>().text = trickPoints.ToString();
             scoreObj.GetComponent<ScoreScript>().AddToScore(trickPoints);
+
+            // radical [0]  Extreme [1]   Sick[2]   Awesome[3]   Great[4]   Good[5]    Too Bad[6]   Awweful[7]
+            int s = 0;
+            if (trickPoints < 50)
+                s = 5;
+            else
+                if (trickPoints < 150)
+                s = 4;
+            else
+                if (trickPoints < 250)
+                s = 3;
+            else
+                if (trickPoints < 300)
+                s = 2;
+            else
+                if (trickPoints < 350)
+                s = 1;
+            else
+                s = 0;
+
+
+            GetComponent<AudioSource>().clip = ComboSound[s];
+            GetComponent<AudioSource>().Play();
+
         }
     }
 
