@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -21,10 +21,9 @@ public class PlayerScript : MonoBehaviour
     public GameObject splash;
     public GameObject shadow;
 
-    public GameObject player;
     public GameObject dude;
     private Animator dudeAnimator;
-    public Animator weaponAnimator;
+    public GameObject weapon;
 
 
     public ParticleSystem ripple;
@@ -35,9 +34,9 @@ public class PlayerScript : MonoBehaviour
 
     public int goodLandingRange;
 
-    private float trickStartTime;
-    private float trickEndTime;
+    private float startAngle;
     public int trickPoints;
+    public float curTrickPoints;
     public GameObject trickPointsObj;
     public GameObject scoreObj;
 
@@ -46,7 +45,6 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindWithTag("Player");
         dudeAnimator = dude.GetComponent<Animator>();
     }
 
@@ -64,12 +62,15 @@ public class PlayerScript : MonoBehaviour
         // Collide with wave
         if (collision.tag=="Wave" && !isJumping)
         {
+
+            startAngle = transform.localEulerAngles.z;
+
+            curTrickPoints = 0;
+
             Debug.Log("Hit wave");
             ripple.gameObject.SetActive(false);
             isJumping = true;
             float waveHeight = collision.transform.localScale.x*.8f;
-
-            trickStartTime = Time.time;
 
             var seq = LeanTween.sequence();
 
@@ -123,9 +124,12 @@ public class PlayerScript : MonoBehaviour
                         splash2.startSpeed = waveHeight * 6 + 1.2f;
                         splash3.startSpeed = waveHeight * 6 + 1.2f;
 
-                        splash1.maxParticles = (int)(666);
-                        splash2.maxParticles = (int)(666);
-                        splash3.maxParticles = (int)(666);
+                        var main = splash1.main;
+                        main.maxParticles = (int)(666);
+                        main = splash2.main;
+                        main.maxParticles = (int)(666);
+                        main = splash3.main;
+                        main.maxParticles = (int)(666);
 
                         splash3.startSize = 2.3f;
 
@@ -136,8 +140,8 @@ public class PlayerScript : MonoBehaviour
                 }
                 else // good landing
                 {
-                    trickEndTime = Time.time;
-                    trickPoints = (int)((trickEndTime - trickStartTime)*10);
+
+                    trickPoints = (int)(curTrickPoints);
                     
 
                     // put point text at player pos
@@ -207,17 +211,13 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Fire3"))
         {
             // Call the PlayerAttack function
-            PlayerAttack();
+
+            weapon.GetComponent<WeaponScript>().PlayerAttack();
 
         }
 
     }
 
-    void PlayerAttack()
-    {
-        weaponAnimator.SetTrigger("Attack");
-        weaponAnimator.GetComponent<Collider2D>().enabled = true;
-        weaponAnimator.GetComponent<Collider2D>().enabled = false;
-    }
+
 
 }

@@ -70,10 +70,12 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetAxis("Vertical") > 0)
             {
                 character.transform.localEulerAngles = new Vector3(0,0, character.transform.localEulerAngles.z+(curTime * rotSpeed));
+                GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
             }
             if (Input.GetAxis("Vertical") < 0)
             {
                 character.transform.localEulerAngles = new Vector3(0, 0, character.transform.localEulerAngles.z-(curTime * rotSpeed));
+                GetComponentInChildren<PlayerScript>().curTrickPoints += .5f;
             }
         }
 

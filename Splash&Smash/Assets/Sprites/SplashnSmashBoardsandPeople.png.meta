@@ -137,7 +137,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,7 +158,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -179,7 +179,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -200,7 +200,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -221,7 +221,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -242,7 +242,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -263,7 +263,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -284,7 +284,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -297,15 +297,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_8
+      name: Duck
       rect:
         serializedVersion: 2
         x: 3
         y: 97
         width: 10
         height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -318,15 +318,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_9
+      name: Granny
       rect:
         serializedVersion: 2
         x: 19
         y: 96
         width: 10
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -347,7 +347,7 @@ TextureImporter:
         width: 25
         height: 7
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -360,15 +360,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_11
+      name: Duc
       rect:
         serializedVersion: 2
         x: 3
         y: 81
         width: 10
         height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -381,15 +381,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_12
+      name: Du
       rect:
         serializedVersion: 2
         x: 16
         y: 81
         width: 15
         height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -410,7 +410,7 @@ TextureImporter:
         width: 16
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -431,7 +431,7 @@ TextureImporter:
         width: 15
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -444,15 +444,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_15
+      name: Person
       rect:
         serializedVersion: 2
         x: 3
         y: 64
         width: 10
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -472,8 +472,8 @@ TextureImporter:
         y: 64
         width: 10
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -486,15 +486,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_17
+      name: Zombi
       rect:
         serializedVersion: 2
         x: 35
         y: 64
         width: 10
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -507,15 +507,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_18
+      name: Zombie
       rect:
         serializedVersion: 2
         x: 51
         y: 64
         width: 9
         height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -535,8 +535,8 @@ TextureImporter:
         y: 0
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -556,8 +556,8 @@ TextureImporter:
         y: 0
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -577,8 +577,8 @@ TextureImporter:
         y: 0
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -598,8 +598,8 @@ TextureImporter:
         y: 16
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -619,8 +619,8 @@ TextureImporter:
         y: 16
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -639,9 +639,9 @@ TextureImporter:
         x: 2
         y: 32
         width: 11
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -661,8 +661,8 @@ TextureImporter:
         y: 16
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -675,15 +675,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SplashnSmashBoardsandPeople_26
+      name: Clown
       rect:
         serializedVersion: 2
         x: 18
         y: 32
         width: 11
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -703,8 +703,8 @@ TextureImporter:
         y: 16
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -723,9 +723,9 @@ TextureImporter:
         x: 34
         y: 32
         width: 11
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -745,8 +745,8 @@ TextureImporter:
         y: 32
         width: 11
         height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -769,17 +769,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Clown: 1855912584
+      Du: 1769163519
+      Duc: -895886254
+      Duck: 861727026
+      Granny: 65105836
+      Person: 999046499
       SplashnSmashBoardsandPeople_0: 1681058179
       SplashnSmashBoardsandPeople_1: -319795317
       SplashnSmashBoardsandPeople_10: -1314055316
-      SplashnSmashBoardsandPeople_11: -895886254
-      SplashnSmashBoardsandPeople_12: 1769163519
       SplashnSmashBoardsandPeople_13: 437805532
       SplashnSmashBoardsandPeople_14: -1442839178
-      SplashnSmashBoardsandPeople_15: 999046499
       SplashnSmashBoardsandPeople_16: -1983320347
-      SplashnSmashBoardsandPeople_17: 603313649
-      SplashnSmashBoardsandPeople_18: 641875779
       SplashnSmashBoardsandPeople_19: -1012733928
       SplashnSmashBoardsandPeople_2: -1140614868
       SplashnSmashBoardsandPeople_20: -1540271486
@@ -788,7 +789,6 @@ TextureImporter:
       SplashnSmashBoardsandPeople_23: 25051713
       SplashnSmashBoardsandPeople_24: 522666303
       SplashnSmashBoardsandPeople_25: -665231415
-      SplashnSmashBoardsandPeople_26: 1855912584
       SplashnSmashBoardsandPeople_27: -1856763204
       SplashnSmashBoardsandPeople_28: 1899849897
       SplashnSmashBoardsandPeople_29: -2114083100
@@ -797,8 +797,8 @@ TextureImporter:
       SplashnSmashBoardsandPeople_5: -1203696205
       SplashnSmashBoardsandPeople_6: 1858822035
       SplashnSmashBoardsandPeople_7: -956740514
-      SplashnSmashBoardsandPeople_8: 861727026
-      SplashnSmashBoardsandPeople_9: 65105836
+      Zombi: 603313649
+      Zombie: 641875779
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

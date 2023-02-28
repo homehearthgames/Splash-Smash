@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public WaveBGScript mainWBS; // used to get the player's aprox speed 0-.5
-
     public float enemyFreq;
     private float startEnemyTime;
     private float curTime;
     public GameObject enemyObj;
     public GameObject surfboardObj;
     private bool isMoving = false;
-    public float speed;
-
     public Sprite[] enemySpr;
     public Sprite[] surfboardSpr;
-    public AudioSource[] enemySound;
+    public AudioClip[] enemySound;
 
     void Start()
     {
@@ -30,30 +26,32 @@ public class EnemySpawner : MonoBehaviour
         if (Time.time > startEnemyTime + enemyFreq && !isMoving)
         {
             // spawn obstacle
+
+            GameObject newSurfboard = Instantiate(surfboardObj, transform);
+            GameObject newEnemy = Instantiate(enemyObj, newSurfboard.transform);
+            newSurfboard.transform.position = surfboardObj.transform.position;
+
+
             int y = Random.Range(0, -4); // pick lane
-            surfboardObj.transform.localPosition = new Vector3(0, y, surfboardObj.transform.localPosition.z);
-            isMoving = true;
+            newSurfboard.transform.localPosition = new Vector3(0, y, newSurfboard.transform.localPosition.z);
+
             // pick random surfboard sprite
             int sprNum = Random.Range(0, surfboardSpr.Length);
-            surfboardObj.GetComponent<SpriteRenderer>().sprite = surfboardSpr[sprNum];
+            newSurfboard.GetComponent<SpriteRenderer>().sprite = surfboardSpr[sprNum];
 
             // pick random enemy sprite
             sprNum = Random.Range(0, enemySpr.Length);
-            enemyObj.GetComponent<SpriteRenderer>().sprite = enemySpr[sprNum];
+            newEnemy.GetComponent<SpriteRenderer>().sprite = enemySpr[sprNum];
 
+            // enable enemy script
+            newEnemy.GetComponent<EnemyScript>().enabled = true;
+
+            // reset timer
+            startEnemyTime = Time.time + Random.Range(0, 5.4f);
         }
 
-        if (isMoving)
-            MoveEnemy();
+
     }
 
-    void MoveEnemy()
-    {
-        float t = Time.deltaTime;
-        float waveBGSpeed = mainWBS.waveSpeed;
-        surfboardObj.transform.position = new Vector3(surfboardObj.transform.position.x - speed * t* waveBGSpeed, surfboardObj.transform.position.y, surfboardObj.transform.position.z);
-        if (surfboardObj.transform.position.x < -20)
-            isMoving = false;
-        startEnemyTime = Time.time + Random.Range(0, 5.4f);
-    }
+
 }
