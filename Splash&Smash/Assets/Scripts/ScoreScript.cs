@@ -24,8 +24,12 @@ public class ScoreScript : MonoBehaviour
     {
         score += points;
         txtScore.text = score.ToString();
+        GameManager.score = score;
     }
 
-
+    public int GetScore()
+    {
+        return score;
+    }
 
 }

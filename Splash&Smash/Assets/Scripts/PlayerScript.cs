@@ -55,9 +55,12 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curTime = Time.deltaTime;
+        if (GameManager.gameManager.isFinished == false)
+        {
+            curTime = Time.deltaTime;
 
-        GetInput();
+            GetInput();
+        }
     }
 
 

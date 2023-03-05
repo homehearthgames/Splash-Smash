@@ -25,8 +25,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        curTime = Time.deltaTime;
-        GetInput();
+        if (GameManager.gameManager.isFinished == false)
+        {
+            curTime = Time.deltaTime;
+            GetInput();
+        }
     }
 
 

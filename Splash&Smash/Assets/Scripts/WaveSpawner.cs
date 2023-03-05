@@ -58,20 +58,22 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Time.time > startWaveTime + waveFreq && !isWaveStarted)
-            StartWave();
-        else
+        if (GameManager.gameManager.isFinished == false)
         {
-            if (Time.time > startWaveTime + waveFreq + waveTime + Random.Range(0, 2.1f))
+            if (Time.time > startWaveTime + waveFreq && !isWaveStarted)
+                StartWave();
+            else
             {
-                isWaveStarted = false;
-                startWaveTime = Time.time;
+                if (Time.time > startWaveTime + waveFreq + waveTime + Random.Range(0, 2.1f))
+                {
+                    isWaveStarted = false;
+                    startWaveTime = Time.time;
+                }
+
+                if (isWaveStarted) // move waves
+                    MoveWaves();
+
             }
-
-            if (isWaveStarted) // move waves
-                MoveWaves();
-
         }
     }
 

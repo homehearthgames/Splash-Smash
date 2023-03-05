@@ -14,28 +14,40 @@ public class ObstacleSpawner : MonoBehaviour
 
     public Sprite[] obsSpr;
 
+    public float finishLineFreq;
+    public GameObject finishLineObj;
+
     void Start()
     {
         startObsTime = Time.time + Random.Range(0, 5.4f);
+        curTime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.LogWarning(Time.time);
-        if (Time.time>startObsTime+obsFreq && !isMoving)
-        {
-            // spawn obstacle
-            int y = Random.Range(0, -4);
-            obs.transform.localPosition = new Vector3(0,y,obs.transform.localPosition.z);
-            isMoving = true;
-            // pick random obstacle sprite
-            int sprNum = Random.Range(0, obsSpr.Length);
-            obs.GetComponent<SpriteRenderer>().sprite = obsSpr[sprNum];
-        }
+        // finish line
+        if (Time.time > curTime + finishLineFreq)
+            finishLineObj.SetActive(true);
 
-        if (isMoving)
-            MoveObs();
+
+        if (GameManager.gameManager.isFinished == false)
+        {
+            //Debug.LogWarning(Time.time);
+            if (Time.time > startObsTime + obsFreq && !isMoving)
+            {
+                // spawn obstacle
+                int y = Random.Range(0, -4);
+                obs.transform.localPosition = new Vector3(0, y, obs.transform.localPosition.z);
+                isMoving = true;
+                // pick random obstacle sprite
+                int sprNum = Random.Range(0, obsSpr.Length);
+                obs.GetComponent<SpriteRenderer>().sprite = obsSpr[sprNum];
+            }
+
+            if (isMoving)
+                MoveObs();
+        }
     }
 
     void MoveObs()

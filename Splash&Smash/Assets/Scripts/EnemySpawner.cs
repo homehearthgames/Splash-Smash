@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        startEnemyTime = Time.time + Random.Range(0, 3.4f);
+        startEnemyTime = Time.time + Random.Range(0, enemyFreq);
     }
 
     // Update is called once per frame
@@ -27,13 +27,17 @@ public class EnemySpawner : MonoBehaviour
         {
             // spawn obstacle
 
-            GameObject newSurfboard = Instantiate(surfboardObj, transform);
+            GameObject newSurfboard = Instantiate(surfboardObj);
+            newSurfboard.transform.SetParent(transform);
             GameObject newEnemy = Instantiate(enemyObj, newSurfboard.transform);
             newSurfboard.transform.position = surfboardObj.transform.position;
 
+            transform.position = new Vector3(transform.position.x, -.5f, transform.position.y);
 
-            int y = Random.Range(0, -4); // pick lane
+
+            int y = Random.Range(0, -5); // pick lane
             newSurfboard.transform.localPosition = new Vector3(0, y, newSurfboard.transform.localPosition.z);
+            Debug.Log("Enemy y:" + y);
 
             // pick random surfboard sprite
             int sprNum = Random.Range(0, surfboardSpr.Length);
@@ -47,7 +51,7 @@ public class EnemySpawner : MonoBehaviour
             newEnemy.GetComponent<EnemyScript>().enabled = true;
 
             // reset timer
-            startEnemyTime = Time.time + Random.Range(0, 5.4f);
+            startEnemyTime = Time.time + Random.Range(0, enemyFreq);
         }
 
 

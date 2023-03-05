@@ -14,17 +14,29 @@ public class EnemyScript : MonoBehaviour
     public GameObject enemySpawner;
     private GameObject player;
 
+    private float yMoveSpeed=.6f;
+    int tweenID;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        Debug.LogWarning("Player:" + player.name);
+        //Debug.LogWarning("Player:" + player.name);
         SetClip();
+
+
+        // if Zombi sprite then hover
+        if (GetComponent<SpriteRenderer>().sprite.name == "Zombi")
+        {
+
+            tweenID = LeanTween.moveLocalY(gameObject, .3f, 1).setEase(LeanTweenType.easeInOutBounce).setLoopPingPong(999).id;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        MoveEnemy();
+        if (GameManager.gameManager.isFinished == false)
+            MoveEnemy();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -42,10 +54,24 @@ public class EnemyScript : MonoBehaviour
     {
         float t = Time.deltaTime;
         float waveBGSpeed = mainWBS.waveSpeed;
-        transform.parent.position = new Vector3(transform.parent.position.x - speed * t * waveBGSpeed, transform.parent.transform.parent.position.y, transform.parent.position.z);
+        // move surfboard (parent)
+        transform.parent.position = new Vector3(transform.parent.position.x - speed * t * waveBGSpeed, transform.parent.position.y, transform.parent.position.z);
         if (transform.parent.position.x < -20)
             Destroy(transform.parent.gameObject);
 
+        // if sprite name is Clown, then follow player
+        if (GetComponent<SpriteRenderer>().sprite.name=="Clown")
+        {
+            if (transform.parent.localPosition.x > -10 && transform.parent.GetComponent<BoxCollider2D>().enabled) // only follow player if x pos is not too close and has an enemy on it
+            {
+                if (transform.parent.transform.position.y < player.transform.position.y)
+                    transform.parent.position = new Vector3(transform.parent.position.x, transform.parent.position.y + yMoveSpeed * t, transform.parent.position.z);
+
+
+                if (transform.parent.transform.position.y > player.transform.position.y)
+                    transform.parent.position = new Vector3(transform.parent.position.x, transform.parent.position.y - yMoveSpeed * t, transform.parent.position.z);
+            }
+        }
     }
 
     void KillEnemy()
@@ -63,7 +89,11 @@ public class EnemyScript : MonoBehaviour
         // disable surfboard collider
         transform.parent.GetComponent<BoxCollider2D>().enabled = false;
 
-        //enemySpawner.PlaySound(GetComponent<SpriteRenderer>().sprite);
+        // disable shadow
+        transform.parent.Find("Shadow").GetComponent<SpriteRenderer>().enabled = false;
+
+        // disable lween moving up and down
+        LeanTween.cancel(tweenID);
 
     }
 

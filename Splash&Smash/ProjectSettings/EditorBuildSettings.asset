@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelSelectScene.unity
     guid: 1a96d94a7c6af9544b29048b6736efac
   - enabled: 1
-    path: Assets/Scenes/OptionsScene.unity
+    path: Assets/Scenes/HighScore.unity
     guid: 41f874dea46b8564d9da742213d0cbd3
   - enabled: 1
     path: Assets/Scenes/SurfsideCityScene.unity

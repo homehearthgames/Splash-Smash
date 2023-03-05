@@ -8,6 +8,8 @@ TagManager:
   - Obstacle
   - Enemy
   - Weapon
+  - Score
+  - dreamloLeaderBoard
   layers:
   - Default
   - TransparentFX
