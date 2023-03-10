@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WaveBGScript : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class WaveBGScript : MonoBehaviour
     public GameObject splash;
     private GameObject player;
 
+
+
     public int waveWidth;
 
     void Awake()
@@ -22,6 +25,7 @@ public class WaveBGScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (GameManager.gameManager.isFinished == false)
         {
             waveSpeed += waveAccelleration * Time.deltaTime;

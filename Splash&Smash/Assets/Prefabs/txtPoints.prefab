@@ -60,7 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1500d0b11a6da534bbdb8330d06e48cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textSpeed: 0.1
+  textSpeed: 0.3
+  trickPoints: 0
 --- !u!114 &5323278854594906881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,8 +109,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -124,7 +125,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
+  m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
