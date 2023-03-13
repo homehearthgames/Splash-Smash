@@ -23,10 +23,12 @@ public class SwitchState : MonoBehaviour
     }    
     public void SwitchToLevelSelectState()
     {
+        Debug.Log("SwitchToLevelSelectState");
         GameStateManager.Instance.SwitchState(GameStateManager.Instance.LevelSelectState);
     }   
     public void SwitchToOptionsState()
     {
+        Debug.Log("SwitchToOptionsState");
         GameStateManager.Instance.SwitchState(GameStateManager.Instance.OptionsState);
     }
 
@@ -35,4 +37,11 @@ public class SwitchState : MonoBehaviour
         GameStateManager.Instance.currentScene = sceneName;
         GameStateManager.Instance.SwitchState(GameStateManager.Instance.PlayState);
     }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("Mousedown:" + name);
+    }
+
+
 }

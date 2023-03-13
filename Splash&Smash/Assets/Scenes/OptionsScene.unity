@@ -1032,10 +1032,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1172404282}
+    m_SelectOnDown: {fileID: 1297560811}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1269,10 +1269,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 1297560811}
+    m_SelectOnDown: {fileID: 1172404282}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1465,7 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 0}
+  m_FirstSelected: {fileID: 838341899}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1145494816
@@ -1537,10 +1537,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 838341901}
+    m_SelectOnDown: {fileID: 769270407}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1759,6 +1759,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BackButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 769270407}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 838341901}
     - target: {fileID: 7680068367075128415, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1850,6 +1862,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7680068367075128415, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
   m_PrefabInstance: {fileID: 1297560809}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1297560811 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+  m_PrefabInstance: {fileID: 1297560809}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1325201041
 GameObject:
   m_ObjectHideFlags: 0

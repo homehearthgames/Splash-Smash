@@ -473,7 +473,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1448506627}
+    m_SelectOnUp: {fileID: 1472861999}
     m_SelectOnDown: {fileID: 120605681}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -1193,7 +1193,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 120605681}
-    m_SelectOnDown: {fileID: 346111232}
+    m_SelectOnDown: {fileID: 1472861999}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 3
@@ -1963,6 +1963,30 @@ PrefabInstance:
     - target: {fileID: 7680068367075128400, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
       propertyPath: m_Name
       value: BackButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1448506627}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 346111232}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.90988165
+      objectReference: {fileID: 0}
+    - target: {fileID: 7680068367075128413, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.514151
       objectReference: {fileID: 0}
     - target: {fileID: 7680068367075128415, guid: 9ebf905038d64444f8088b61deabafca, type: 3}
       propertyPath: m_Pivot.x
