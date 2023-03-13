@@ -18,7 +18,7 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (eSystem.currentSelectedGameObject!= storeSelected)
+        if (eSystem.currentSelectedGameObject != storeSelected)
         {
             if (eSystem.currentSelectedGameObject == null)
             {
@@ -44,12 +44,13 @@ public class MenuScript : MonoBehaviour
                 //foreach (var result in results)
                 //{
                 //    Debug.Log("Clicked:" + result.gameObject);
-               // }
+                // }
 
             }
 
 
         }
+    }
 
 
 
