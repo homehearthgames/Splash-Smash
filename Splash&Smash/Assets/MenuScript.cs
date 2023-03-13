@@ -36,16 +36,15 @@ public class MenuScript : MonoBehaviour
             {
 
                 Debug.Log("Clicked on the UI");
-                PointerEventData pointerData = new PointerEventData(EventSystem.current);
-                pointerData.pointerId = -1;
-                //pointerData.position = Mouse.current.position.ReadValue();
-                List<RaycastResult> results = new List<RaycastResult>();
-                EventSystem.current.RaycastAll(pointerData, results);
+                //PointerEventData pointerData = new PointerEventData(EventSystem.current);
+                //pointerData.pointerId = -1;
+                //List<RaycastResult> results = new List<RaycastResult>();
+                //EventSystem.current.RaycastAll(pointerData, results);
 
-                foreach (var result in results)
-                {
-                    Debug.Log("Clicked:" + result.gameObject);
-                }
+                //foreach (var result in results)
+                //{
+                //    Debug.Log("Clicked:" + result.gameObject);
+               // }
 
             }
 
@@ -53,18 +52,6 @@ public class MenuScript : MonoBehaviour
         }
 
 
-
-    }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Mouse Down");
-    }
-
-    private void OnMouseEnter()
-    {
-        Debug.Log("*******************");
-    }
 
 
 }
