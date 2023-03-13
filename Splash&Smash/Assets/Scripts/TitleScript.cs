@@ -23,22 +23,20 @@ public class TitleScript : MonoBehaviour
 
     void DoTitleAnim()
     {
-        //var seq = LeanTween.sequence();
-        //seq.append(.4f); 
+        aSource.Play();
+
         white.color = new Color(1, 1, 1, .9f);
 
         StartCoroutine(SmoothImageFadeToColor(6.0f, BG, 1, new Color(1, 1, 1, 1)));
 
         StartCoroutine(SmoothImageFadeIn(2.2f, gameObject.GetComponent<Image>(), .9f));
 
-        aSource.Play();
-
         LeanTween.delayedCall(white.gameObject, 1.5f, () =>
         {
             //StartCoroutine(SmoothImageFadeIn(.01f, white, 0));
             StartCoroutine(SmoothImageFadeOut(2.9f, white, 0));
 
-            LeanTween.color(white.gameObject, new Color(1,1,1,1), .9f).setOnComplete(
+            LeanTween.color(white.gameObject, new Color(1,1,1,1), 1.4f).setOnComplete(
                     () => {
 
                         LeanTween.scale(titleDude.gameObject, new Vector3(3, 3f, 3f), 2.5f).setEase(LeanTweenType.easeOutBounce);
@@ -50,6 +48,9 @@ public class TitleScript : MonoBehaviour
                             LeanTween.scale(txtSplash.gameObject, new Vector3(1, 1, 1), 2).setEase(LeanTweenType.easeOutBounce);
                         LeanTween.delayedCall(txtN.gameObject, .5f, () =>
                         {
+
+                            white.gameObject.SetActive(false); // deactivate white BG so it doesn't take away UI clicks
+
                             LeanTween.scale(txtN.gameObject, new Vector3(1, 1, 1), 2).setEase(LeanTweenType.easeOutBounce);
                             LeanTween.delayedCall(txtN.gameObject, .5f, () =>
                             {
@@ -57,7 +58,6 @@ public class TitleScript : MonoBehaviour
                                 LeanTween.scale(txtSmash.gameObject, new Vector3(1, 1, 1), 2).setEase(LeanTweenType.easeOutBounce);
                                 LeanTween.delayedCall(txtN.gameObject, 1.5f, () =>
                                 {
-
                                     LeanTween.scale(gameObject, new Vector3(1, 1, 1), 2f).setEase(LeanTweenType.easeOutBounce);
                                     LeanTween.scale(menuCont, new Vector3(1, 1, 1), 2f).setEase(LeanTweenType.easeOutBounce);
                                 });

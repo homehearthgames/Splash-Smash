@@ -38,9 +38,9 @@ public class SwitchState : MonoBehaviour
         GameStateManager.Instance.SwitchState(GameStateManager.Instance.PlayState);
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
-        Debug.Log("Mousedown:" + name);
+        Debug.Log("mouseover :" + name);
     }
 
 
