@@ -38,6 +38,11 @@ public class SwitchState : MonoBehaviour
         GameStateManager.Instance.SwitchState(GameStateManager.Instance.PlayState);
     }
 
+    public void SwitchToHighScoreState()
+    {
+        GameStateManager.Instance.SwitchState(GameStateManager.Instance.WonState);
+    }
+
     private void OnMouseOver()
     {
         Debug.Log("mouseover :" + name);

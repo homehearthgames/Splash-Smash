@@ -39,10 +39,10 @@ public class TitleScript : MonoBehaviour
             LeanTween.color(white.gameObject, new Color(1,1,1,1), 1.4f).setOnComplete(
                     () => {
 
-                        LeanTween.scale(titleDude.gameObject, new Vector3(3, 3f, 3f), 2.5f).setEase(LeanTweenType.easeOutBounce);
-                        LeanTween.rotateAround(titleDude.gameObject, Vector3.forward, 732f, 2.1f).setEase(LeanTweenType.easeInOutQuad);
+                        LeanTween.scale(titleDude.gameObject, new Vector3(3, 3f, 3f), 2.9f).setEase(LeanTweenType.easeOutBounce);
+                        LeanTween.rotateAround(titleDude.gameObject, Vector3.forward, 732f, 2.4f).setEase(LeanTweenType.easeInOutQuad);
 
-                        LeanTween.delayedCall(txtN.gameObject, 1.1f, () =>
+                        LeanTween.delayedCall(txtN.gameObject, 1.9f, () =>
                         {
 
                             LeanTween.scale(txtSplash.gameObject, new Vector3(1, 1, 1), 2).setEase(LeanTweenType.easeOutBounce);

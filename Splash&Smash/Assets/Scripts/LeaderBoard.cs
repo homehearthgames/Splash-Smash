@@ -21,6 +21,10 @@ public class LeaderBoard : MonoBehaviour
     private TMP_Text txtRank;
     private TMP_Text txtScore;
 
+    public GameObject optionsContainer;
+    public GameObject leftButton;
+    public GameObject rightButton;
+
     dreamloLeaderBoard dl;
     List<dreamloLeaderBoard.Score> scoreList;
 
@@ -35,9 +39,88 @@ public class LeaderBoard : MonoBehaviour
         //GameManager.score = 500;
         //GameManager.levelName = "SurfsideCityScene";
 
-        levelText.GetComponent<TMP_Text>().text = GameManager.levelName.Substring(0, GameManager.levelName.Length - 5);
+        if (GameManager.levelName == null)
+        {
+            Debug.Log("Levelname=nothing");
+            levelText.GetComponent<TMP_Text>().text = "SurfsideCity";
+            GameManager.levelName = "SurfsideCityScene";
+        }
+        else
+            levelText.GetComponent<TMP_Text>().text = GameManager.levelName.Substring(0, GameManager.levelName.Length - 5);
 
         // change background
+        ChangeBG();
+
+        Debug.Log("Scene:" + GameManager.levelName);
+        Debug.Log("Score:" + GameManager.score);
+
+        StartCoroutine(PopulateScores());
+
+    }
+
+    public void DecLevel()
+    {
+        Debug.Log("GameManager.levelName:"+ GameManager.levelName);
+        if (GameManager.levelName == "SurfsideCityScene")
+        {
+            BGImage.sprite = spr[2];
+            levelMatch = "San";
+            GameManager.levelName = "SantoriniSunsetScene";
+        }
+        else
+if (GameManager.levelName == "JumanjiJungleScene")
+        {
+            BGImage.sprite = spr[0];
+            levelMatch = "Sur";
+            GameManager.levelName = "SurfsideCityScene";
+        }
+        else
+if (GameManager.levelName == "SantoriniSunsetScene")
+        {
+            BGImage.sprite = spr[1];
+            levelMatch = "Jum";
+            GameManager.levelName = "JumanjiJungleScene";
+        }
+        levelText.GetComponent<TMP_Text>().text = GameManager.levelName.Substring(0, GameManager.levelName.Length - 5);
+
+        ClearScores();
+        ChangeBG();
+        StartCoroutine(PopulateScores());
+    }
+
+    public void IncLevel()
+    {
+        Debug.Log("GameManager.levelName:"+ GameManager.levelName);
+        if (GameManager.levelName == "SurfsideCityScene")
+        {
+            BGImage.sprite = spr[1];
+            levelMatch = "Jum";
+            GameManager.levelName = "JumanjiJungleScene";
+        }
+        else
+        if (GameManager.levelName == "JumanjiJungleScene")
+        {
+            BGImage.sprite = spr[2];
+            levelMatch = "San";
+            GameManager.levelName = "SantoriniSunsetScene";
+        }
+        else
+        if (GameManager.levelName == "SantoriniSunsetScene")
+        {
+            BGImage.sprite = spr[0];
+            levelMatch = "Sur";
+            GameManager.levelName = "SurfsideCityScene";
+        }
+
+        levelText.GetComponent<TMP_Text>().text = GameManager.levelName.Substring(0, GameManager.levelName.Length - 5);
+
+        ClearScores();
+        ChangeBG();
+        StartCoroutine(PopulateScores());
+    }
+
+    private void ChangeBG()
+    {
         if (GameManager.levelName == "SurfsideCityScene")
         {
             BGImage.sprite = spr[0];
@@ -53,21 +136,26 @@ public class LeaderBoard : MonoBehaviour
             BGImage.sprite = spr[2];
             levelMatch = "San";
         }
-
-        Debug.Log("Scene:" + GameManager.levelName);
-        Debug.Log("Score:" + GameManager.score);
-
-        StartCoroutine(PopulateScores());
-
     }
 
+    private void ClearScores()
+    {
+        foreach(Transform trans in optionsContainer.transform)
+        {
+            Debug.Log("name:" +trans.name);
+            if (trans.name.Contains("Clone"))
+            {
+                GameObject.Destroy(trans.gameObject);
+            }
+        }
+    }
 
     IEnumerator PopulateScores()
     {
         int maxToDisplay = 10;
         int count = 0;
         int rank = 999;
-        Debug.Log("displaying leaderboard");
+        //Debug.Log("displaying leaderboard");
         scoreList = dl.ToListHighToLow();
         float delay = 2.5f;
         float startTime = Time.time;
@@ -87,6 +175,8 @@ public class LeaderBoard : MonoBehaviour
 
             string name = currentScore.playerName.Substring(0, 3);
             string level= currentScore.playerName.Substring(3, 3);
+
+            //Debug.Log("levelMatch:" + levelMatch + " Score:" + currentScore.score+ " level:"+ level);
 
             if (level == levelMatch)
             {
@@ -123,6 +213,11 @@ public class LeaderBoard : MonoBehaviour
                     nrt.GetComponent<TMP_Text>().text = count.ToString();
                     nnt.GetComponent<TMP_Text>().text = name;
                     nst.GetComponent<TMP_Text>().text = currentScore.score.ToString();
+
+                    // hide level sel buttons
+                    leftButton.SetActive(false);
+                    rightButton.SetActive(false);
+
                 }
                 else
                 {
@@ -140,7 +235,7 @@ public class LeaderBoard : MonoBehaviour
 
 
         Debug.Log("r:" + rank + " count:" + count);
-        if(rank==999 && count<10)
+        if(rank==999 && count<10 && GameManager.score>0)
         {
             // instantiate Text GameObjects
             GameObject rt = (GameObject)Instantiate(rankTemplate, rankTemplate.transform.parent);
@@ -161,6 +256,10 @@ public class LeaderBoard : MonoBehaviour
             rt.SetActive(true);
             nt.SetActive(true);
             st.SetActive(true);
+
+            // hide level sel buttons
+            leftButton.SetActive(false);
+            rightButton.SetActive(false);
 
             Debug.Log("You still got a High score Rank:" + rank);
         }
@@ -218,6 +317,7 @@ public class LeaderBoard : MonoBehaviour
 
             if (keyCode == KeyCode.Return)
             {
+                Debug.Log("Hit Return");
                 txtName.color = new Color32(255, 255, 255, 255);
                 txtRank.color = new Color32(255, 255, 255, 255);
                 txtScore.color = new Color32(255, 255, 255, 255);
@@ -225,111 +325,13 @@ public class LeaderBoard : MonoBehaviour
                 // random number
                 int ran = Random.Range(0, 999999);
                 string name = txtName.text + GameManager.levelName.Substring(0, 3)+ran.ToString();
+                Debug.Log("Add score: " + GameManager.score + " name:" + name);
                 dl.AddScore(name, GameManager.score);
+                GameManager.score = 0;
             }
         }  
 
     }
-
-
-
-    // public void AddScoreToLeaderboard(int Score)
-    // {
-    //     dl.AddScore(this.playerName, Score);
-    // }
-
-    /*
-
-    void OnGUI()
-    {
-        var width200 = new GUILayoutOption[] { GUILayout.Width(500) };
-
-        var width = 920;  // Make this wider to add more columns
-        var height = 570;
-
-        var r = new Rect((Screen.width / 2) - (width / 2), 20, width, height);
-        GUILayout.BeginArea(r, new GUIStyle("box"));
-
-        GUILayout.BeginVertical();
-        GUI.skin.label.fontSize = 18;
-
-
-
-        //if (this.gs == gameState.enterscore)
-        {
-            GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-            myButtonStyle.fontSize = 18;
-            Font myFont = (Font)Resources.Load("Fonts/Power", typeof(Font));
-            myButtonStyle.font = myFont;
-
-
-            GUILayout.Label("Total Score: " + GameManager.gameManager.GetScore(), myButtonStyle);
-            GUILayout.BeginHorizontal();
-            GUILayout.Label("Your Name: ");
-
-            this.playerName = GUILayout.TextField(this.playerName, myButtonStyle);
-
-            if (GUILayout.Button("Save Score", myButtonStyle))
-            {
-                // add the score...
-                if (dl.publicCode == "") Debug.LogError("You forgot to set the publicCode variable");
-                if (dl.privateCode == "") Debug.LogError("You forgot to set the privateCode variable");
-
-
-
-                //UnityWebRequest www = new UnityWebRequest("http://dreamlo.com/lb/" + privateCode + "/add/" + UnityWebRequest.EscapeURL(username) + "/" + score);
-                //yield return www.SendWebRequest();
-
-                dl.AddScore(this.playerName+SceneManager.GetActiveScene(), GameManager.gameManager.GetScore());
-
-                //this.gs = gameState.leaderboard;
-            }
-            GUILayout.EndHorizontal();
-        }
-
-        //if (this.gs == gameState.leaderboard)
-        {
-            GUIStyle myButtonStyle = new GUIStyle(GUI.skin.button);
-            myButtonStyle.fontSize = 18;
-            Font myFont = (Font)Resources.Load("Fonts/Power", typeof(Font));
-            myButtonStyle.font = myFont;
-
-            GUILayout.Label("High Scores:", myButtonStyle);
-            List<dreamloLeaderBoard.Score> scoreList = dl.ToListHighToLow();
-
-            if (scoreList == null)
-            {
-                GUILayout.Label("(loading...)");
-            }
-            else
-            {
-                int maxToDisplay = 10;
-                int count = 0;
-                //Debug.Log("displaying leaderboard");
-                foreach (dreamloLeaderBoard.Score currentScore in scoreList)
-                {
-                    count++;
-                    GUILayout.BeginHorizontal();
-                    GUILayout.Label(currentScore.playerName, myButtonStyle);
-                    GUILayout.Label(currentScore.score.ToString(), myButtonStyle);
-                    GUILayout.EndHorizontal();
-                    //Debug.Log("LB: " + currentScore.playerName + " " + currentScore.score);
-                    if (count >= maxToDisplay) break;
-
-                }
-            }
-
-            if (GUILayout.Button("Play Again", myButtonStyle))
-            {
-                Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
-            }
-
-        }
-        GUILayout.EndVertical();
-        GUILayout.EndArea();
-
-    }
-    */
 
 }
 

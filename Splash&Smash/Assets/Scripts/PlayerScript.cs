@@ -101,8 +101,11 @@ public class PlayerScript : MonoBehaviour
                 isJumping = false;
 
                 // idle dude
-                dudeAnimator.SetBool("Trick1", false);
-                dude.GetComponent<Animator>().SetBool("Trick2", false);
+                if (dude !=null)
+                {
+                    dudeAnimator.SetBool("Trick1", false);
+                    dude.GetComponent<Animator>().SetBool("Trick2", false);
+                }
 
                 ResetSplash();
                 float mult = 1.6f;

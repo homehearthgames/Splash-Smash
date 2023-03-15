@@ -59,7 +59,9 @@ public class FinishlineScript : MonoBehaviour
         audioSource.volume = startVolume;
 
         // ********** Finished ***********
-        SceneManager.LoadScene("HighScore");        
+        //SceneManager.LoadScene("HighScore");        
+
+        GameStateManager.Instance.SwitchState(GameStateManager.Instance.WonState);
 
     }
 
