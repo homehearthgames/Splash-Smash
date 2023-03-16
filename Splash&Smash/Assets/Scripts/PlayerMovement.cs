@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject character;
     public Animator dudeAnimator;
-    // Start is called before the first frame update
+
     void Start()
     {
         
@@ -55,6 +55,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (!(Input.GetAxis("Horizontal") > 0)) // if not pressing right then movement speed=0
             character.GetComponent<PlayerScript>().movementSpeed = 0;
+
+        // wind
+
+        if (character.GetComponent<PlayerScript>().movementSpeed > 0)
+        {
+            character.GetComponent<PlayerScript>().wind.gameObject.SetActive(true);
+            character.GetComponent<PlayerScript>().wind.emissionRate = 22 + (int)(character.GetComponent<PlayerScript>().movementSpeed * 200);
+            character.GetComponent<PlayerScript>().wind.transform.position = character.transform.position;
+            if (!character.GetComponent<PlayerScript>().wind.GetComponent<AudioSource>().isPlaying)
+                character.GetComponent<PlayerScript>().wind.GetComponent<AudioSource>().Play();
+            Debug.Log("maxParticles:" + character.GetComponent<PlayerScript>().wind.maxParticles);
+        }
+        else
+        {
+            character.GetComponent<PlayerScript>().wind.gameObject.SetActive(false);
+            character.GetComponent<PlayerScript>().wind.GetComponent<AudioSource>().Stop();
+        }
 
 
         // only do vertical movement when not jumping

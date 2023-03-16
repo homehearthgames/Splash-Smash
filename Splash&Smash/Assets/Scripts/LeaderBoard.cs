@@ -28,16 +28,17 @@ public class LeaderBoard : MonoBehaviour
     dreamloLeaderBoard dl;
     List<dreamloLeaderBoard.Score> scoreList;
 
+    private void Awake()
+    {
+        LeanTween.reset();
+    }
+
     void Start()
     {
         // get the reference here...
         dl = dreamloLeaderBoard.GetSceneDreamloLeaderboard();
 
-        //dl.AddScore("CCD", 10);
         dl.GetScores();
-
-        //GameManager.score = 500;
-        //GameManager.levelName = "SurfsideCityScene";
 
         if (GameManager.levelName == null)
         {
@@ -142,7 +143,7 @@ if (GameManager.levelName == "SantoriniSunsetScene")
     {
         foreach(Transform trans in optionsContainer.transform)
         {
-            Debug.Log("name:" +trans.name);
+            //Debug.Log("name:" +trans.name);
             if (trans.name.Contains("Clone"))
             {
                 GameObject.Destroy(trans.gameObject);
@@ -159,6 +160,9 @@ if (GameManager.levelName == "SantoriniSunsetScene")
         scoreList = dl.ToListHighToLow();
         float delay = 2.5f;
         float startTime = Time.time;
+
+        yield return new WaitForSeconds(.6f);
+
         while (scoreList.Count == 0 && Time.time<startTime+delay)
         {
             scoreList = dl.ToListHighToLow();

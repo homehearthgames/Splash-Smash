@@ -42,6 +42,8 @@ public class PlayerScript : MonoBehaviour
     private float trickStartTime;
     private float trickEndTime;
 
+    public ParticleSystem wind;
+
     public Canvas canvas;
 
     public AudioClip[] ComboSound;
@@ -171,7 +173,7 @@ public class PlayerScript : MonoBehaviour
 
                 transform.localEulerAngles = new Vector3(0, 0, 0);
                 isJumping = false;
-                movementSpeed = 0;
+                //movementSpeed = 0;
                 ripple.gameObject.SetActive(true);
             }); 
 
